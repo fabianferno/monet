@@ -11,8 +11,6 @@ export default function Home() {
   const blockchain = useSelector((state) => state.blockchain);
   // const data = useSelector((state) => state.data);
 
-  console.log(window.user);
-
   const businessNameInputRef = useRef();
   const companyNameInputRef = useRef();
 
@@ -20,19 +18,24 @@ export default function Home() {
     var business = businessNameInputRef.current.value;
     var company_name = companyNameInputRef.current.value;
 
-    const receipt = await blockchain.contract.methods
+    console.log(business, company_name);
+
+    const receipt = await blockchain.serviceNFTToken.methods
       .createNFT(business, company_name)
       .send({
         from: blockchain.account,
+        value: blockchain.web3.utils.toWei("0.01", "ether"),
       });
     console.log(receipt);
   }
 
   useEffect(() => {
+    console.log("account", blockchain.account);
+    console.log("contract", blockchain.serviceNFTToken);
     if (blockchain.account !== "" && blockchain.serviceNFTToken !== null) {
       dispatch(fetchData(blockchain.account));
     }
-  }, [blockchain, dispatch]);
+  }, [blockchain]);
 
   return blockchain.account === "" || blockchain.serviceNFTToken === null ? (
     <Layout>

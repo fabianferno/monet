@@ -12,6 +12,8 @@ export default function Home() {
   const data = useSelector((state) => state.data);
   const [loading, setLoading] = useState(false);
 
+  console.log(data);
+
   const mintNFT = (_account, _name) => {
     setLoading(true);
     console.log(_account);
@@ -106,24 +108,29 @@ export default function Home() {
             />
           </div>
 
-          <div className="list-group">
-            <a
-              href="#"
-              className="list-group-item list-group-item-action bg-dark text-white"
-              aria-current="true"
-            >
-              <div className="d-flex w-100 justify-content-between">
-                <h5 className="mb-1 fw-bold">Simera Web Devs</h5>
-                <small className="text-success">Rank #1</small>
+          {data.loading ? (
+            <div>Loading</div>
+          ) : (
+            data.allServiceNFTs.map((service) => (
+              <div className="list-group">
+                <a
+                  href="#"
+                  className="list-group-item list-group-item-action bg-dark text-white"
+                  aria-current="true"
+                >
+                  <div className="d-flex w-100 justify-content-between">
+                    <h5 className="mb-1 fw-bold">{service.company_name}</h5>
+                    <small className="text-success">
+                      Rank #{service.rarity}
+                    </small>
+                  </div>
+                  <small className="mb-1 fw-normal text-secondary">
+                    {service.business}
+                  </small>
+                </a>
               </div>
-              <small className="mb-1 fw-normal text-secondary">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Similique consequatur laudantium ex tenetur, dolorem libero nisi
-                culpa in explicabo quaerat animi maiores. Perspiciatis et
-                voluptatem incidunt illo expedita quam similique!
-              </small>
-            </a>
-          </div>
+            ))
+          )}
         </section>
       </div>
     </Layout>

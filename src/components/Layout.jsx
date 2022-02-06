@@ -74,7 +74,7 @@ export default function Layout(props) {
         </p>
       </section>
       <section style={{ minHeight: "70vh" }}>{props.children}</section>
-      <section id="footer" className="bg-dark pt-4 pb-2">
+      <section id="footer" className="pt-4 pb-2">
         <div className="d-flex justify-content-center align-items-center">
           <p className="text-center text-muted">
             <small>

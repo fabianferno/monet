@@ -42,7 +42,8 @@ export const connect = () => {
         });
         const serviceNFTToken = new web3.eth.Contract(
           ServiceNFTToken,
-          "0x126d0098A61Bd34eD44fe328E418D3CE543632F2"
+          "0xE3493e9E5bFC9636056112A903c70bbADa7d374F" 
+          // "0x126d0098A61Bd34eD44fe328E418D3CE543632F2"
         );
         console.log(accounts);
         console.log(serviceNFTToken);

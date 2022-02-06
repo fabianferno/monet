@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { connect } from "../redux/blockchain/blockchainActions";
@@ -9,7 +9,7 @@ import Layout from "../components/Layout";
 export default function Home() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
-  const data = useSelector((state) => state.data);
+  // const data = useSelector((state) => state.data);
 
   console.log(window.user);
 

@@ -109,23 +109,42 @@ export default function Home() {
           </div>
 
           {data.loading ? (
-            <div>Loading</div>
+            <div className="d-flex align-items-center">
+              <strong>Loading...</strong>
+              <div
+                className="spinner-border ms-auto"
+                role="status"
+                ariaHidden="true"
+              ></div>
+            </div>
           ) : (
             data.allServiceNFTs.map((service) => (
-              <div className="list-group">
+              <div className="d-flex">
+                <div>
+                  <img src="/images/webdev.jpg" width="150px" alt="" />
+                  <div className="btn btn-sm btn-success text-dark d-block fw-bold">
+                    {service.rarity}
+                  </div>
+                </div>
                 <a
                   href="#"
                   className="list-group-item list-group-item-action bg-dark text-white"
                   aria-current="true"
                 >
-                  <div className="d-flex w-100 justify-content-between">
+                  <div className="d-flex w-100 mt-4 justify-content-between">
                     <h5 className="mb-1 fw-bold">{service.company_name}</h5>
                     <small className="text-success">
                       Rank #{service.rarity}
                     </small>
                   </div>
-                  <small className="mb-1 fw-normal text-secondary">
+                  <p className="mb-1 fw-normal text-secondary">
                     {service.business}
+                  </p>
+                  <small className="fw-normal">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                    Asperiores vel id deleniti possimus perspiciatis. Quisquam
+                    fuga aut rerum, ipsam praesentium illum numquam dicta
+                    tempora, est, sunt necessitatibus quaerat ipsum sit.
                   </small>
                 </a>
               </div>

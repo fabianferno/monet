@@ -82,6 +82,10 @@ export default function Home() {
                   nihil? Expedita officiis voluptatem porro, molestias magnam
                   culpa at ratione, consectetur, nisi nihil nostrum.
                 </p>
+
+                <button className="btn text-success text-end">
+                  {"Find Businesses >> "}
+                </button>
               </div>
             ))}
           </div>

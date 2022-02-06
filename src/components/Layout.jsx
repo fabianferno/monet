@@ -1,20 +1,20 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 export default function Layout(props) {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
-  const history = useHistory();
-
   async function login() {
     try {
       // we will use this provider with web3 library in STEP 5.
       const provider = await window.web3AuthInstance.connect();
+      console.log(provider);
 
       // ⭐️ It will return user's social information if logged in with social login method
       // else it will return empty object.
       setUser(await window.web3AuthInstance.getUserInfo());
+
       setError(null);
     } catch (error) {
       setError(error.message);
@@ -51,7 +51,8 @@ export default function Layout(props) {
           ) : (
             <div className="d-flex align-items-end justify-content-center">
               <p className="h4 fw-normal me-3 text-secondary">
-                Hello, <strong>{user.name}</strong>
+                Hello, <strong>{user.name}</strong>{" "}
+                {localStorage.setItem("user", JSON.stringify(user))}
               </p>
               <button
                 onClick={logout}
@@ -70,7 +71,10 @@ export default function Layout(props) {
 
         <p className="bg-success no-select shadow text-start px-3 py-2">
           A web3 <strong> business directory</strong> with NFT based business
-          ranking.
+          ranking. &nbsp;
+          <Link className="fw-bold text-black" to="/dashboard">
+            Create a listing for your Business
+          </Link>
         </p>
       </section>
       <section style={{ minHeight: "70vh" }}>{props.children}</section>

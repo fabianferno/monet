@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { connect } from "../redux/blockchain/blockchainActions";
@@ -10,35 +10,14 @@ export default function Home() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
-  const [loading, setLoading] = useState(false);
 
   console.log(data);
-
-  const mintNFT = (_account, _name) => {
-    setLoading(true);
-    console.log(_account);
-    blockchain.serviceNFTs.methods
-      .createRandomGod(_name)
-      .send({
-        from: _account,
-        value: blockchain.web3.utils.toWei("0.01", "ether"),
-      })
-      .once("error", (err) => {
-        setLoading(false);
-        console.log(err);
-      })
-      .then((receipt) => {
-        setLoading(false);
-        console.log(receipt);
-        dispatch(fetchData(blockchain.account));
-      });
-  };
 
   useEffect(() => {
     if (blockchain.account !== "" && blockchain.serviceNFTToken !== null) {
       dispatch(fetchData(blockchain.account));
     }
-  }, [blockchain]);
+  }, [blockchain, dispatch]);
 
   return blockchain.account === "" || blockchain.serviceNFTToken === null ? (
     <Layout>
@@ -127,7 +106,7 @@ export default function Home() {
                   </div>
                 </div>
                 <a
-                  href="#"
+                  href="/service"
                   className="list-group-item list-group-item-action bg-dark text-white"
                   aria-current="true"
                 >

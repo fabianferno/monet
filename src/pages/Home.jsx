@@ -15,7 +15,7 @@ export default function Home() {
   const mintNFT = (_account, _name) => {
     setLoading(true);
     console.log(_account);
-    blockchain.godToken.methods
+    blockchain.serviceNFTs.methods
       .createRandomGod(_name)
       .send({
         from: _account,
@@ -36,23 +36,29 @@ export default function Home() {
     if (blockchain.account !== "" && blockchain.serviceNFTToken !== null) {
       dispatch(fetchData(blockchain.account));
     }
-  }, [blockchain.godToken, blockchain.account]);
+  }, [blockchain]);
 
-  return blockchain.account === "" || blockchain.godToken === null ? (
+  return blockchain.account === "" || blockchain.serviceNFTToken === null ? (
     <Layout>
-      <div className="d-flex justify-content-center align-items-center">
-        <div className="h1 fw-bold text-white card p-3 rounded-3 bg-dark shadow">
-          Connect your wallet
-        </div>
-
+      <div
+        style={{ height: "60vh" }}
+        className="d-flex  justify-content-center align-items-center"
+      >
         <button
-          className="btn btn-primary mt-3 fw-bold"
+          className="h1 text-white p-3 rounded-3 btn btn-dark mt-3 fw-bold shadow"
           onClick={(e) => {
             e.preventDefault();
             dispatch(connect());
           }}
         >
-          CONNECT
+          CONNECT WITH METAMASK{" "}
+          <img
+            src="/images/metamask.png"
+            className="ps-3"
+            height="50px"
+            alt=""
+            srcset=""
+          />
         </button>
         <hr className="text-primary" />
         {blockchain.errorMsg !== "" ? <div>{blockchain.errorMsg}</div> : null}
@@ -64,9 +70,12 @@ export default function Home() {
         <div className="mt-3 text-start">
           <h1 className="mb-4 text-white fw-bold">Find Services</h1>
           <div className="d-flex justify-content-start align-items-start">
-            {[1, 2, 3].map((i) => (
-              <div className="card card-body bg-dark rounded me-md-3  p-4 pb-2">
-                <h3 className="text-white">Web Development</h3>
+            {["Web Development", "Catering", "Plumbing"].map((item, key) => (
+              <div
+                key={key}
+                className="card card-body bg-dark rounded me-md-3  p-4 pb-2"
+              >
+                <h3 className="text-white">{item}</h3>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. In
                   maiores molestiae quibusdam aliquid laborum at obcaecati

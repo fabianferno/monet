@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "./assets/scss/index.scss";
 
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
+import "./assets/scss/index.scss";
 
 function App() {
   return (

@@ -15,8 +15,8 @@ export default function Layout(props) {
       // ⭐️ It will return user's social information if logged in with social login method
       // else it will return empty object.
       setUser(await window.web3AuthInstance.getUserInfo());
+      setError(null);
     } catch (error) {
-      console.log(error.message);
       setError(error.message);
     }
   }
@@ -25,11 +25,8 @@ export default function Layout(props) {
     try {
       await window.web3AuthInstance.logout();
       setUser(await window.web3AuthInstance.getUserInfo());
-      document.getElementById("address").innerText = "";
-      document.getElementById("balance").innerText = "";
+      setError(null);
     } catch (error) {
-      console.log(error.message);
-
       setError(error.message);
     }
   }
@@ -58,7 +55,7 @@ export default function Layout(props) {
               </p>
               <button
                 onClick={logout}
-                className="btn btn-lg btn-success font-weight-bold text-capitalize"
+                className="btn btn-lg btn-success  fw-bold font-weight-bold text-capitalize"
               >
                 Logout
               </button>

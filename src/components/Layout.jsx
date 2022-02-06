@@ -16,6 +16,7 @@ export default function Layout(props) {
       // else it will return empty object.
       setUser(await window.web3AuthInstance.getUserInfo());
     } catch (error) {
+      console.log(error.message);
       setError(error.message);
     }
   }
@@ -27,6 +28,8 @@ export default function Layout(props) {
       document.getElementById("address").innerText = "";
       document.getElementById("balance").innerText = "";
     } catch (error) {
+      console.log(error.message);
+
       setError(error.message);
     }
   }

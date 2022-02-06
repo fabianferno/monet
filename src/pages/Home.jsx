@@ -88,6 +88,39 @@ export default function Home() {
         </div>
 
         <hr className="text-secondary" />
+
+        <section>
+          <div className="form-group my-4">
+            <label htmlFor="inputName" className="text-secondary">
+              Search
+            </label>
+            <input
+              type="text"
+              className="p-3 d-flex bg-dark w-100 text-white  rounded focus-none"
+              id="inputName"
+              placeholder="Catering, Plumbing, Web Development, etc"
+            />
+          </div>
+
+          <div className="list-group">
+            <a
+              href="#"
+              className="list-group-item list-group-item-action bg-dark text-white"
+              aria-current="true"
+            >
+              <div className="d-flex w-100 justify-content-between">
+                <h5 className="mb-1 fw-bold">Simera Web Devs</h5>
+                <small className="text-success">Rank #1</small>
+              </div>
+              <small className="mb-1 fw-normal text-secondary">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Similique consequatur laudantium ex tenetur, dolorem libero nisi
+                culpa in explicabo quaerat animi maiores. Perspiciatis et
+                voluptatem incidunt illo expedita quam similique!
+              </small>
+            </a>
+          </div>
+        </section>
       </div>
     </Layout>
   );

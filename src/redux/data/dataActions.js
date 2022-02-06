@@ -27,11 +27,11 @@ export const fetchData = (account) => {
     try {
       let allServiceNFTs = await store
         .getState()
-        .blockchain.serviceNFTToken.methods.getServiceNFTs()
+        .blockchain.serviceNFTToken.methods.getNfts()
         .call();
       let allOwnerServiceNFTs = await store
         .getState()
-        .blockchain.serviceNFTToken.methods.getOwnerServiceNFTs(account)
+        .blockchain.serviceNFTToken.methods.getOwnerNft(account)
         .call();
 
       dispatch(

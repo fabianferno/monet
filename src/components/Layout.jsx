@@ -73,12 +73,12 @@ export default function Layout(props) {
           ranking.
         </p>
       </section>
-      <section style={{ minHeight: "80vh" }}>{props.children}</section>
-      <section id="footer" className="bg-secondary">
+      <section style={{ minHeight: "70vh" }}>{props.children}</section>
+      <section id="footer" className="bg-dark pt-4 pb-2">
         <div className="d-flex justify-content-center align-items-center">
           <p className="text-center text-muted">
             <small>
-              <strong>monet</strong>&trade; &copy; 2020
+              <strong>monet</strong>&trade; MIT License &copy; 2022
             </small>
           </p>
         </div>

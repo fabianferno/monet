@@ -1,6 +1,6 @@
 // constants
 import Web3 from "web3";
-import ServiceNFTToken from "../../contracts/ServiceNFTToken.json";
+import ServiceNFTToken from "../../contract/NFT.json";
 // log
 import { fetchData } from "../data/dataActions";
 

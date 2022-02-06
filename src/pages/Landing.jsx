@@ -27,11 +27,7 @@ export default function Landing() {
         </p>
 
         <div className="d-flex justify-content-around mt-2">
-          <Link
-            className="mx-3"
-            to="/home"
-            // onClick={signInWithGitHub}
-          >
+          <Link className="mx-3" to="/home">
             <span className="btn btn-primary social-pill mr-5 font-weight-bold text-capitalize">
               Login using Web3Auth
             </span>

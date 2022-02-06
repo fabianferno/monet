@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -24,12 +22,13 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
+  <title>React App</title>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -39,5 +38,73 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
+
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.7.0/dist/web3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@web3auth/web3auth@0.2.2/dist/web3auth.umd.min.js"></script>
+
+  <script>
+    // ⭐️ access Web3auth package from window.
+    const web3authSdk = window.Web3auth
+    window.web3AuthInstance = null;
+    (async function init() {
+
+      const polygonMumbaiConfig = {
+        chainNamespace: "eip155",
+        rpcTarget: "https://rpc-mumbai.maticvigil.com",
+        blockExplorer: "https://mumbai-explorer.matic.today",
+        chainId: "0x13881",
+        displayName: "Polygon Mumbai Testnet",
+        ticker: "matic",
+        tickerName: "matic",
+      };
+
+      // ⭐️ STEP: 1
+      window.web3AuthInstance = new web3authSdk.Web3Auth({
+        chainConfig: polygonMumbaiConfig,
+        clientId: "BL35m2YW6usZcEsoen48qgodQ3dyj6zJvVuwIgpmddra3Zc8d2pfbroJn-tR4Bz2A4PMNbc6Ns1kh-Di1zI1dBo" // get your clientId from https://dashboard.web3auth.io
+      });
+
+      // ⭐️ STEP: 2
+      subscribeAuthEvents(window.web3AuthInstance)
+
+      // ⭐️ STEP: 3
+      await window.web3AuthInstance.initModal();
+    })();
+
+
+    function subscribeAuthEvents(web3auth) {
+      web3auth.on("connected", (data) => {
+        console.log("Yeah!, you are successfully logged in", data);
+      });
+
+      web3auth.on("connecting", () => {
+        console.log("connecting");
+      });
+
+      web3auth.on("disconnected", () => {
+        console.log("disconnected");
+      });
+
+      web3auth.on("errored", (error) => {
+        console.log("some error or user have cancelled login request", error);
+      });
+
+      web3auth.on("MODAL_VISIBILITY", (isVisible) => {
+        console.log("modal visibility", isVisible)
+      });
+    }
+
+
+
+    // ⭐️ STEP 5:
+    async function initWeb3() {
+      // we can access this provider on `web3AuthInstance` only after user is logged in.
+      // This provider is also returned as a response of `connect` function in step 4. You can use either ways.
+      window.web3 = new Web3(web3AuthInstance.provider);
+      window.address = (await web3.eth.getAccounts())[0];
+      window.balance = await web3.eth.getBalance(address);
+    }
+  </script>
+</body>
+
 </html>
